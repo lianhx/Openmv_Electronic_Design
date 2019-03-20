@@ -1,7 +1,26 @@
 # Openmv_Electronic_Design
+OKmain.py
+===========================================================
+OKmain.py就是说这是功能合成后的脚本文件了.<br>
+其他的文件都是只作模块化学习.<br>
+主要设计思路.<br>
+建立2个3帧的数组buf_x,buf_y.<br>
+buf_x[0]是本时刻小球x坐标.<br>
+buf_x[1]是上一时刻小球x坐标.<br>
+buf_x[2]是上上一时刻小球x坐标.<br>
+我们用(buf_x[0]-buf_x[1])/frame_time就得到了当前时刻速度.<br>
+frame_time是帧间隔.<br>
+同理，(buf_x[1]-buf_x[2])/frame_time是上一时刻速度.<br>
+那么（当前时刻速度-上一时刻速度）/frame_time就得到了加速度.<br>
+
+堆的简便设计：.<br>
+当我们获得了小球当前时刻坐标，要对其更新的时候.<br>
+我们首先使用move_()函数，move_()函数将buf_x[1]赋值给buf_x[2]，.<br>
+将buf_x[0]赋值给buf_x[1]，这样，buf_x[0]的位置就空出来了，.<br>
+之前的buf_x[2]因为数据过期被之前的buf_x[1]覆盖掉。.<br>
 
 
-#cal_speed_aspeed.py
+cal_speed_aspeed.py
 ===========================================================
 1.设计了一个3帧的堆.<br>
 遵循数据先进先出的原则.<br>
@@ -10,7 +29,7 @@
 frame_time是两帧之间的间隔时间.<br>
 
 
-#detect_send_ball_position.py
+detect_send_ball_position.py
 ============================================================
 初始化相机，设置一些有利于我们的参数.<br>
 
