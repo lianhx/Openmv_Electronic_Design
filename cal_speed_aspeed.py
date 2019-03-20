@@ -2,18 +2,13 @@
 
 buf_x=[0,0,0]
 buf_y=[0,0,0]
-index=0
 frame_time=0.12
+
 def move_(index):
-    temp_x=buf_x[2]
     buf_x[2]=buf_x[1]
     buf_x[1]=buf_x[0]
-    buf_x[0]=temp_x
-    temp_y=buf_y[2]
     buf_y[2]=buf_y[1]
     buf_y[1]=buf_y[0]
-    buf_y[0]=temp_y
-    
 
 while(True):
     x=int(input())
@@ -22,8 +17,6 @@ while(True):
     move_(index)
     buf_x[0]=x
     buf_y[0]=y
-    index=index+1
-    if(index>2):index=0
     print(buf_x,buf_y)
     speed_now_x=(buf_x[0]-buf_x[1])/frame_time
     speed_now_y=(buf_x[0]-buf_x[1])/frame_time
