@@ -3,7 +3,7 @@ using namespace std;
 #include<opencv2/opencv.hpp>
 using namespace cv;
 
-void find_rect( Mat &src, int limit_value)
+Rect find_rect( Mat &src, int limit_value)
 {
 	threshold(src, src, limit_value, 255, THRESH_BINARY);
 
@@ -28,7 +28,8 @@ void find_rect( Mat &src, int limit_value)
 			src.at<cv::Vec3b>(j + 1, i - 1)[0] + src.at<cv::Vec3b>(j + 1, i)[0] + src.at<cv::Vec3b>(j + 1, i + 1)[0]) / 9;
 		if ((box_mean > limit_value)&&(!left_flag))
 		{
-			printf("[%d,%d]", i, j); left_x = i; left_y = j;
+			//printf("[%d,%d]", i, j);
+			left_x = i; left_y = j;
 			left_flag = 1;
 		}		
 	}
@@ -40,7 +41,8 @@ void find_rect( Mat &src, int limit_value)
 			src.at<cv::Vec3b>(j + 1, i - 1)[0] + src.at<cv::Vec3b>(j + 1, i)[0] + src.at<cv::Vec3b>(j + 1, i + 1)[0]) / 9;
 		if ((box_mean > limit_value)&&(!right_flag))
 		{
-			printf("[%d,%d]", i, j); right_x = i; right_y = j;
+			//printf("[%d,%d]", i, j); 
+			right_x = i; right_y = j;
 			right_flag = 1;
 		}
 			
@@ -53,7 +55,8 @@ void find_rect( Mat &src, int limit_value)
 			src.at<cv::Vec3b>(j + 1, i - 1)[0] + src.at<cv::Vec3b>(j + 1, i)[0] + src.at<cv::Vec3b>(j + 1, i + 1)[0]) / 9;
 		if ((box_mean > limit_value) && (!up_flag))
 		{
-			printf("[%d,%d]", i, j); up_x = i; up_y = j;
+			//printf("[%d,%d]", i, j); 
+			up_x = i; up_y = j;
 			up_flag = 1;
 		}		
 	}
@@ -65,14 +68,36 @@ void find_rect( Mat &src, int limit_value)
 			src.at<cv::Vec3b>(j + 1, i - 1)[0] + src.at<cv::Vec3b>(j + 1, i)[0] + src.at<cv::Vec3b>(j + 1, i + 1)[0])/9;
 		if ((box_mean > limit_value)&&(!down_flag))
 		{
-			printf("[%d,%d]", i, j); down_x = i; down_y = j;
+			//printf("[%d,%d]", i, j); 
+			down_x = i; down_y = j;
 			down_flag = 1;
 		}
 	}
 
 	rectangle(src, Rect(left_x, up_y, right_x - left_x, down_y - up_y), Scalar(0, 255, 0), 3);
+
+	return Rect(left_x, up_y, right_x - left_x, down_y - up_y);
 }
 
+
+void find_ball(Mat &src, Rect _rect, int limit_value)
+{
+	for (int j = _rect.y; j < _rect.y + _rect.height; j += 2)
+	{
+		for (int i = _rect.x; i < _rect.x + _rect.width; i += 2)
+		{
+			int box_mean = (src.at<cv::Vec3b>(j - 1, i - 1)[0] + src.at<cv::Vec3b>(j - 1, i)[0] + src.at<cv::Vec3b>(j - 1, i + 1)[0] +
+				src.at<cv::Vec3b>(j, i - 1)[0] + src.at<cv::Vec3b>(j, i)[0] + src.at<cv::Vec3b>(j, i + 1)[0] +
+				src.at<cv::Vec3b>(j + 1, i - 1)[0] + src.at<cv::Vec3b>(j + 1, i)[0] + src.at<cv::Vec3b>(j + 1, i + 1)[0]) / 9;
+			if ((box_mean > limit_value))
+			{
+				printf("[%d,%d]", i, j); 
+				circle(src, Point(i, j), 1, Scalar(0, 255, 0), 3);
+			}
+		}
+	}
+	//return Point(i, j);
+}
 
 
 
@@ -80,7 +105,7 @@ int main()
 {
 	Mat src = imread("demo.jpg");
 
-	find_rect(src, 100);
+	find_ball(src, find_rect(src, 100), 230);
 
 	imshow("0",src);
 	waitKey(0);
