@@ -6,7 +6,8 @@
 1、木板边界定位<br>
 2、小球定位<br>
 目前这两个任务已经在Windows端使用opencv实现，接下来移植成python代码即可<br>
-
+![Image text](https://github.com/ssmem/Openmv_Electronic_Design/blob/master/demo.jpg)<br>
+![Image text](https ://github.com/ssmem/Openmv_Electronic_Design/blob/master/demo.PNG)<br>
 
 OKmain.py
 ===========================================================
