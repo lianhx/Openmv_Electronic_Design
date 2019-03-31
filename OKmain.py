@@ -33,13 +33,13 @@ while(True):
         buf_y[0]=c.y()
     print(buf_x,buf_y)
     speed_now_x=(buf_x[0]-buf_x[1])/frame_time
-    speed_now_y=(buf_x[0]-buf_x[1])/frame_time
+    speed_now_y=(buf_y[0]-buf_y[1])/frame_time
     speed_last_x=(buf_x[1]-buf_x[2])/frame_time
-    speed_last_y=(buf_x[1]-buf_x[2])/frame_time
+    speed_last_y=(buf_y[1]-buf_y[2])/frame_time
     a_speed_x=(speed_now_x-speed_last_x)/frame_time
     a_speed_y=(speed_now_y-speed_last_y)/frame_time
-    print("速度：",speed_now_x)
-    print("加速度：",a_speed_x)
+    print("x 速度：",speed_now_x)
+    print("x 加速度：",a_speed_x)
     output_str="[%d,%d]" % (c.x(),c.y())
     print('you send:',output_str)
     uart.write(output_str+'\r\n')
