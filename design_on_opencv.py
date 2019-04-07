@@ -41,11 +41,19 @@ def find_rect(src,gray):
             right_flag=0
             rect[2]=col
             cv.circle(src,(col,row),3,(0,0,213),-1)
-    cv.rectangle(src, (rect[0],rect[1]), (rect[2],rect[3]), (255,0,0),3)
+    for col in range(rect[0]+5,rect[2]-5,2):
+        for row in range(rect[1]+5,rect[3]-5,2):
+            pv1 = [thresh[row-1, col-1],thresh[row-1, col],thresh[row-1, col+1]]
+            pv2 = [thresh[row  , col-1],thresh[row  , col],thresh[row  , col+1]]
+            pv3 = [thresh[row+1, col-1],thresh[row+1, col],thresh[row+1, col+1]]
+            aver =  (int(pv1[0])+int(pv1[1])+int(pv1[2]))/9
+            aver += (int(pv2[0])+int(pv2[1])+int(pv2[2]))/9
+            aver += (int(pv3[0])+int(pv3[1])+int(pv3[2]))/9
+            if(aver > 240):
+                cv.circle(src,(col,row),3,(0,0,213),-1)
+        cv.rectangle(src, (rect[0],rect[1]), (rect[2],rect[3]), (255,0,0),3)
     cv.imshow("bin", thresh)
     cv.imshow("src", src)
-    
-    
     
     
 image = cv.imread("demo.jpg")
