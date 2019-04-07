@@ -1,15 +1,15 @@
 # Openmv_Electronic_Design
-FinalEdition.py
+FinalEdition.py 《最终版本》
 ===========================================================
 ## 工作基本完成<br>
 
-更新一波：<br>
+
 调用霍夫圆检测的算法会使得算力不够，效率降低<br>
-期望采用图像块遍历的方法进行快速搜索定位<br>
+采用图像块遍历的方法进行快速搜索定位<br>
 具体任务有：<br>
 1、木板边界定位<br>
 2、小球定位<br>
-目前这两个任务已经在Windows端使用opencv实现，接下来移植成python代码即可<br>
+目前这两个任务已经用opencv实现，提供了3个平台的代码<br>
 ![Image text](https://github.com/ssmem/Openmv_Electronic_Design/blob/master/demo.jpg)
 ![Image text](https://github.com/ssmem/Openmv_Electronic_Design/blob/master/demo.PNG)
 
