@@ -87,5 +87,5 @@ while(True):
 
     datap = pack('BBBBHHHHHH',0x35,0x46,0x57,0x24,buf_x[0],buf_y[0],int(speed_now_x),int(speed_now_y),int(a_speed_x),int(a_speed_y))
     print('you send:',datap)
-    uart.write(datap+'\r\n')
+    uart.write(datap)
     print("FPS %f" % clock.fps())
