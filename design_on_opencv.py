@@ -26,7 +26,8 @@ def find_rect_and_ball(src,gray):
         row = int(0.5*height)
         pv = thresh[row, col]
         if((pv>150)&(r_flag)):r_flag=0;rect[2]=col;cv.circle(src,(col,row),3,(0,0,213),-1)
-    locate =[0,0]
+    locate = [0,0]
+    t_locate = [0,0]
     count = 0
     for col in range(rect[0]+5,rect[2]-5,2):
         for row in range(rect[1]+5,rect[3]-5,2):
@@ -44,13 +45,16 @@ def find_rect_and_ball(src,gray):
         locate[0]=int(locate[0]/count)
         locate[1]=int(locate[1]/count)
     cv.rectangle(src, (rect[0],rect[1]), (rect[2],rect[3]), (255,0,0),3)
-    return locate
+    cv.circle(src,(locate[0],locate[1]),3,(0,0,233),-1)
+    t_locate[0]=int(650*((locate[0]-rect[0])/(rect[2]-rect[0])))
+    t_locate[1]=int(650*((locate[1]-rect[1])/(rect[3]-rect[1])))
+    return t_locate
 
 image = cv.imread("demo.jpg")
 GrayImage=cv.cvtColor(image,cv.COLOR_BGR2GRAY)
 
 located = find_rect_and_ball(image,GrayImage)
-cv.circle(image,(located[0],located[1]),3,(0,0,233),-1)
+print(located[0],located[1])
 cv.imshow("image", image)
 cv.waitKey(0)
 cv.destroyAllWindows()
