@@ -13,11 +13,11 @@ clock = time.clock()
 thresholds = [(210, 255)] # grayscale thresholds设置阈值
 buf_x=[0,0,0]
 buf_y=[0,0,0]
-frame_time=0.10
+frame_time=0.05
 
 def find_rect_and_ball(thresh):
     u_flag = 1;d_flag = 1;l_flag = 1;r_flag = 1
-    rect=[0,0,0,0]
+    rect=[20,180,20,180]
     height = thresh.height();width = thresh.width() 
     for row in range(int(0.5*height),0,-1):
         col = int(0.5*width)
@@ -85,7 +85,8 @@ while(True):
     print("x 速度：",speed_now_x)
     print("x 加速度：",a_speed_x)
 
-    datap = pack('BBBBHHHHHH',0x35,0x46,0x57,0x24,buf_x[0],buf_y[0],int(speed_now_x),int(speed_now_y),int(a_speed_x),int(a_speed_y))
+    datap = pack('bbbbhhhhhh',0x35,0x46,0x57,0x24,buf_x[0],buf_y[0],int(speed_now_x),int(speed_now_y),int(a_speed_x),int(a_speed_y))
     print('you send:',datap)
     uart.write(datap)
     print("FPS %f" % clock.fps())
+    frame_time = 1/clock.fps()
