@@ -1,5 +1,5 @@
 # Openmv_Electronic_Design
-FinalEdition.py 《实验效果极差》
+上传几个往年国赛代码。。。这里注明一下来源：Sw52 / OpenMV-CODE mengfanli / openmv_find_bool 
 ===========================================================
 ## 重新修订一下处理过程
 ### 先对图像二值化，然后精准地寻找一次边框
