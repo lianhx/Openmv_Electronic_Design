@@ -26,7 +26,7 @@ def find_rect():
         u_flag = 1;d_flag = 1;l_flag = 1;r_flag = 1 # 设置4个边界的查找状态变量，若查找成功为0，否则为1
         height = thresh.height();width = thresh.width() # 获取图像的高度和宽度
         rect=[int(0.2*width),int(0.1*height),int(0.8*width),int(0.9*height)] # 初始化一个矩形变量
-        
+        # col是列的意思，row是行的意思，width是列的数量，height是行的数量
         for row in range(int(0.5*height),0,-2): # 向上寻找上边界
             col = int(0.5*width)
             pv = thresh.get_pixel(col,row) # 获取(col,row)这个点的像素值
