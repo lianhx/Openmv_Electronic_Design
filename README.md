@@ -72,8 +72,8 @@ while(True):
         img = sensor.snapshot() # 从感光芯片获得一张图像
         blobs = img.find_blobs([blob_thresholds]) # 寻找色块
         for b in blobs:
-            if b.w()>2 and b.w()<15: # 筛选宽度在3~14之间的色块
-                if b.h()>2 and b.h()<15: # 筛选宽度在3~14之间的色块
+            if b.w()>2 and b.w()<15: # 筛选宽度在3~14个像素之间的色块
+                if b.h()>2 and b.h()<15: # 筛选高度在3~14个像素之间的色块
                     if b.x()>20 and b.x()<300:        #这里是筛选小球可能出现的矩形区域
                         if b.y()>20 and b.y()<220:    #这里是筛选小球可能出现的矩形区域
                             img.draw_rectangle(b[0:4],color=(0,0,255)) # rect #用矩形标记出目标颜色区域
