@@ -41,8 +41,8 @@ while(True):
                             #print ("X= %d, Y=%d" %(b[5], b[6]))
                             buf_x[2] = buf_x[1];buf_x[1] = buf_x[0];
                             buf_y[2] = buf_y[1];buf_y[1] = buf_y[0];
-                            buf_x[0] = int((b[5]-160)*600/230) # 将坐标先转化成毫米比例，再转化成int
-                            buf_y[0] = int((b[6]-120)*600/230) # 将坐标先转化成毫米比例，再转化成int
+                            buf_x[0] = int((b[5]-160)*650/200) # 将坐标先转化成毫米比例，再转化成int
+                            buf_y[0] = int((b[6]-120)*650/200) # 将坐标先转化成毫米比例，再转化成int
                             speed_now_x=(buf_x[0]-buf_x[1])/frame_time #计算x方向的速度
                             speed_now_y=(buf_y[0]-buf_y[1])/frame_time #计算y方向的速度
                             speed_last_x=(buf_x[1]-buf_x[2])/frame_time #计算上一时刻x方向的速度
